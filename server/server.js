@@ -36,7 +36,7 @@ app.post('/prompt', async (req, res) => {
   const dalleReqBody = {
     prompt: prompt,
     n: 1,
-    size: '256x256',
+    size: '1024x1024',
     // "response_format": 'b64_json'
   };
   try {

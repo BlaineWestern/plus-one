@@ -3,7 +3,7 @@ import { Center, Image, Flex, Spinner, Box, Button } from '@chakra-ui/react';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 
 export default function ImageCanvas({ imageURL, prompt }) {
-  const promptRef = useRef(prompt)
+  const promptRef = useRef(prompt);
   const canvasRef = useRef();
   const [loading, setLoading] = useState(true);
   const [imageData, setImageData] = useState(null);
@@ -16,7 +16,7 @@ export default function ImageCanvas({ imageURL, prompt }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      // Here we could easily pass more values to the body. 
+      // Here we could easily pass more values to the body.
       body: JSON.stringify({ prompt: p }),
     });
     //TODO handle error
@@ -46,7 +46,9 @@ export default function ImageCanvas({ imageURL, prompt }) {
                 canvasColor={'transparent'}
                 ref={canvasRef}
                 strokeWidth={5}
-                strokeColor={mode === 1 ? '#FF5733' : '#50C878'}
+                strokeColor={
+                  mode === 1 ? '#FF5733' : mode === 2 ? '#50C878' : "#0E4C92"
+                }
               />
             </Box>
             <Box w="100%" h="100%" position="absolute" zIndex={14}>
@@ -58,7 +60,7 @@ export default function ImageCanvas({ imageURL, prompt }) {
       <Flex w="100%" justifyContent={'space-between'}>
         <Button
           isDisabled={loading}
-          w="50%"
+          w="33.33%"
           size={'sm'}
           onClick={() => setMode(1)}
           bgColor="#FF5733"
@@ -69,7 +71,18 @@ export default function ImageCanvas({ imageURL, prompt }) {
         </Button>
         <Button
           isDisabled={loading}
-          w="50%"
+          w="33.33%"
+          size={'sm'}
+          onClick={() => setMode(3)}
+          bgColor="#0E4C92"
+          color="white"
+          borderRadius={'0 0 0 0'}
+        >
+          Add Elements
+        </Button>
+        <Button
+          isDisabled={loading}
+          w="33.33%"
           size={'sm'}
           onClick={() => setMode(2)}
           bgColor="#50C878"
